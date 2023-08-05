@@ -1,1 +1,60 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+@use 'palette';
+@include mat.core();
+
+// hue. Available color palettes: https://material.io/design/color/
+$compragamer-primary: mat.define-palette(palette.$primary, 500);
+$compragamer-accent: mat.define-palette(palette.$accent, 500);
+$compragamer-text: mat.define-palette(palette.$text, 500);
+
+$compragamer-theme: mat.define-light-theme((color: (primary: $compragamer-primary,
+        accent: $compragamer-accent,
+        text: $compragamer-text,
+      )));
+
+@include mat.all-component-themes($compragamer-theme);
+
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+main {
+  margin: 4rem auto;
+}
+
+.container {
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  @media (max-width: 1399px) {
+    max-width: 1200px;
+  }
+
+  @media (max-width: 1199px) {
+    max-width: 992px;
+  }
+
+  @media (max-width: 991px) {
+    max-width: 768px;
+  }
+
+  @media (max-width: 767px) {
+    max-width: 100%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}

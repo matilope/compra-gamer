@@ -1,0 +1,16 @@
+<section>
+  <h2>Listado de productos</h2>
+  <div class="filters">
+    <app-filters [option]="option" (priceEvent)="priceData($event);" (categoryEvent)="categoryData($event);" />
+  </div>
+  <div class="products">
+    <ng-container *ngIf="products.length; else noData;">
+      <ng-container *ngFor="let product of products; let i = index; trackBy: trackByFn">
+        <app-product [product]="product" *ngIf="product.vendible" />
+      </ng-container>
+    </ng-container>
+    <ng-template #noData>
+      <p>No hay productos de esta categoría</p>
+    </ng-template>
+  </div>
+</section>

@@ -1,0 +1,25 @@
+<div class="container">
+  <mat-toolbar>
+    <div>
+      <button (click)="openNav();" mat-icon-button aria-label="Menú hamburguesa">
+        <mat-icon color="primary" aria-hidden="false" aria-label="Menú">menu</mat-icon>
+      </button>
+      <ul #menuList>
+        <li (click)="openNav();">
+          <mat-icon>dashboard</mat-icon>
+          <a color="text" routerLink="/">Productos</a>
+        </li>
+      </ul>
+      <h1><a color="text" routerLink="/">Compra Gamer</a></h1>
+    </div>
+    <div>
+      <button color="primary" mat-raised-button aria-label="Registro usuario">
+        <mat-icon aria-hidden="false" aria-label="Registro">account_circle</mat-icon>
+        Registrarse
+      </button>
+      <a routerLink="/carrito" mat-icon-button class="shopping-icon" aria-label="Botón de Carrito de compras">
+        <mat-icon [matBadge]="total" matBadgeColor="warn" color="text" aria-hidden="false" aria-label="Ícono de Carrito de compras">shopping_cart</mat-icon>
+      </a>
+    </div>
+  </mat-toolbar>
+</div>

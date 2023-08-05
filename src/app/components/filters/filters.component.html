@@ -1,0 +1,25 @@
+<button class="category" mat-button [matMenuTriggerFor]="category">Categorías</button>
+<mat-menu #category="matMenu">
+  <button *ngFor="let item of subcategories; trackBy: trackByFn" (click)="emitProduct(item.id);" mat-menu-item>
+    {{item.nombre}}
+    <img class="c-image" style="width: 100%;" [src]="'https://compragamer.net/categorias_demo/' + item.imagen"
+      [alt]="item.nombre" />
+  </button>
+</mat-menu>
+
+<button class="price" mat-button [matMenuTriggerFor]="price">Precio</button>
+<mat-menu #price="matMenu">
+  <button *ngFor="let item of ['Menor precio', 'Mayor precio']" (click)="emitPrice(item);"
+    mat-menu-item>{{item}}</button>
+</mat-menu>
+
+<div class="chip-container" *ngIf="option">
+  <mat-chip-listbox aria-label="Fish selection">
+    <mat-chip-option selected (click)="reset(0);">
+      {{option}}
+      <button (click)="reset(0);" matChipRemove [attr.aria-label]="'remove ' + option">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip-option>
+  </mat-chip-listbox>
+</div>

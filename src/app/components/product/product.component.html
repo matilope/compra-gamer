@@ -1,0 +1,22 @@
+<article>
+  <mat-card>
+    <div class="image-container">
+    <img mat-card-image
+      [src]="'https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_' + product.imagenes[0].nombre + '-med.jpg'"
+      [alt]="product.nombre" />
+    </div>
+    <mat-card-header>
+      <h3>{{product.nombre}}</h3>
+    </mat-card-header>
+    <mat-card-content>
+      <span class="subcategory">{{product.nombre_subcategoria}}</span>
+      <span color="accent">{{product.precio | arscurrency}}</span>
+    </mat-card-content>
+    <mat-card-actions>
+      <button [disabled]="alreadyExists.includes(product.id_producto) ? true : false" (click)="addToCart(product);"
+        mat-raised-button color="primary">
+        {{alreadyExists.includes(product.id_producto) ? 'Sumado al carrito': 'Sumar al carrito'}}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</article>

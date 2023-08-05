@@ -1,0 +1,15 @@
+:host {
+  .category,
+  .price {
+    background-color: #4675b9;
+    color: white !important;
+
+    &:not(.price) {
+      margin-right: 1rem;
+    }
+  }
+
+  .chip-container {
+    margin-top: 1rem;
+  }
+}

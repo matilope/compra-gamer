@@ -1,0 +1,32 @@
+<div class="cart-container">
+  <h2>Carrito de compras</h2>
+  <ng-container *ngIf="items.length; else empty">
+    <div class="cart-items" *ngFor="let item of items; let i = index; trackBy: trackByFn;"
+      [style.background-color]="i % 2 ? '#f2f2f2' : 'rgb(210, 210, 210)'">
+      <img
+        [src]="'https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_'+item.imagenes[0].nombre+ '-med.jpg'"
+        [alt]="item.nombre" />
+      <h3>{{item.nombre}}</h3>
+      <div class="input-container">
+        <span [style.pointer-events]="item.cantidad <= 1 ? 'none' : 'unset'" (click)="updateQuantity(item, 'remove');">
+          <mat-icon>remove</mat-icon>
+        </span>
+        <input [style.border]="item.cantidad >= 5 ? '1px solid #fc3308' : ''" type="number" [value]="item.cantidad"
+          readonly />
+        <span [style.pointer-events]="item.cantidad >= 5 ? 'none' : 'unset'" (click)="updateQuantity(item, 'add');">
+          <mat-icon>add</mat-icon>
+        </span>
+      </div>
+      <span class="price">{{item.precio * item.cantidad | arscurrency}}</span>
+      <div class="delete">
+        <mat-icon (click)="deleteItem(item);">delete</mat-icon>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #empty>
+    <p>No hay productos agregados al carrito</p>
+  </ng-template>
+  <div class="price-total-container">
+    <p>Precio total: {{total | arscurrency}}</p>
+  </div>
+</div>
