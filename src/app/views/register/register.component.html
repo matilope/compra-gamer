@@ -1,0 +1,33 @@
+<div>
+  <h2>Registro de usuario</h2>
+  <form (ngSubmit)="onSubmit();" [formGroup]="formGroup">
+    <mat-form-field>
+      <mat-label for="nombre">Nombre</mat-label>
+      <input type="text" matInput id="nombre" name="nombre" formControlName="nombre" />
+      <mat-error>El nombre no puede quedar vacío</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label for="apellido">Apellido</mat-label>
+      <input type="text" matInput id="apellido" name="apellido" formControlName="apellido" />
+      <mat-error>El apellido no puede quedar vacío</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label for="dni">DNI</mat-label>
+      <input type="number" matInput id="dni" name="dni" formControlName="dni" />
+      <mat-error>El DNI tiene que ser válido</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label for="correo">Correo</mat-label>
+      <input type="email" matInput id="correo" name="correo" formControlName="correo" />
+      <mat-error>El correo tiene que ser válido</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label for="telefono">Teléfono</mat-label>
+      <input type="string" matInput id="telefono" name="telefono" formControlName="telefono" />
+      <mat-error>El telefono tiene que ser válido</mat-error>
+    </mat-form-field>
+    <button color="primary" mat-raised-button aria-label="Confirmación de registro de usuario" [disabled]="formGroup.invalid">
+      Registrarse
+    </button>
+  </form>
+</div>
