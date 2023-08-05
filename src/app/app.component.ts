@@ -15,11 +15,17 @@ import { HeaderComponent } from '@components/header/header.component';
 export class AppComponent {
   public giveOptionToScroll: boolean = false;
 
-  @HostListener('scroll') public scroll(event: Event): void {
-    console.log(event);
-    if (event && document.body.scrollTop >= 100) {
-      this.giveOptionToScroll = true;
-    }
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    this.giveOptionToScroll = (window.scrollY >= 100);
+  }
+
+  scrollUp(): void {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    })
   }
 
 }

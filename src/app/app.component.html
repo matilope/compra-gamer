@@ -2,7 +2,7 @@
 <main class="container">
   <router-outlet></router-outlet>
 </main>
-<div *ngIf="giveOptionToScroll" class="scroller" color="primary">
+<div (click)="scrollUp();" *ngIf="giveOptionToScroll" class="scroller" color="primary">
   <mat-icon>keyboard_arrow_up</mat-icon>
 </div>
 <app-footer />

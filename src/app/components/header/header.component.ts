@@ -23,7 +23,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @ViewChild('menuList') public menuList: ElementRef;
 
   ngOnInit(): void {
-    this.menuList.nativeElement
     this._localStorageService.cart$
       .pipe(
         takeUntil(this.destroy$)

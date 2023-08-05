@@ -51,6 +51,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   addToCart(event: Product): void {
     this._localStorageService.setItem(event, null);
+    this.openSnackBar();
   }
 
   ngOnDestroy(): void {
