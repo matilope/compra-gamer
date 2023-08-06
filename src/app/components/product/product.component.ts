@@ -7,11 +7,12 @@ import { ArsCurrencyPipe } from '@shared/pipes/currency.pipe';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { LocalStorageService } from '@shared/services/local-storage.service';
 import { Subject, takeUntil } from 'rxjs';
+import { NgOptimizedImage } from '@angular/common'
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [NgFor, NgIf, ArsCurrencyPipe, MatCardModule, MatButtonModule, MatSnackBarModule],
+  imports: [NgFor, NgIf, ArsCurrencyPipe, MatCardModule, MatButtonModule, MatSnackBarModule, NgOptimizedImage],
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })

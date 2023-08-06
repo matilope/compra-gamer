@@ -90,6 +90,37 @@ export class UserService {
     });
   }
 
+
+  getUsers(): Observable<User[]> {
+    return new Observable((observer: Observer<User[]>) => {
+      this.init().pipe(
+        take(1),
+      ).subscribe({
+        next: (db: IDBDatabase) => {
+          const transaction = db.transaction(['users'], 'readonly');
+          const objectStore = transaction.objectStore('users');
+
+          const request = objectStore.getAll();
+
+          request.onsuccess = () => {
+            const products = request.result;
+            observer.next(products);
+            observer.complete();
+          };
+
+          request.onerror = (event: any) => {
+            observer.error('Error al obtener los usuarios');
+            observer.complete();
+          };
+        },
+        error: (err: any) => {
+          observer.error(err);
+          observer.complete();
+        }
+      });
+    });
+  }
+
   getUserById(id: number): Observable<User | undefined> {
     return new Observable((observer: Observer<User | undefined>) => {
       this.init().pipe(

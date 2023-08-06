@@ -7,11 +7,13 @@ import { LocalStorageService } from '@shared/services/local-storage.service';
 import { Product } from '@core/models/product';
 import { Subject, takeUntil } from 'rxjs';
 import { RouterLink } from '@angular/router';
+import { UserService } from '@shared/services/register.service';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, MatIconModule, MatButtonModule, MatToolbarModule, MatBadgeModule],
+  imports: [NgIf, RouterLink, MatIconModule, MatButtonModule, MatToolbarModule, MatBadgeModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
@@ -19,7 +21,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private readonly _localStorageService: LocalStorageService = inject(LocalStorageService);
   private readonly destroy$: Subject<void> = new Subject<void>();
   private readonly renderer: Renderer2 = inject(Renderer2);
+  private readonly _userService: UserService = inject(UserService);
   public total: number = 0;
+  public isLoggedIn: boolean = false;
   @ViewChild('menuList') public menuList: ElementRef;
 
   ngOnInit(): void {
@@ -39,6 +43,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
           // No me gusta dejar console.logs en el código
         }
       });
+      this._userService.getUsers().subscribe({
+        next: (response) => {
+          if(response[0]?.nombre) {
+            this.isLoggedIn = true;
+          }
+        }
+      })
   }
 
   openNav(): void {

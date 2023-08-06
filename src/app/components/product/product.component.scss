@@ -29,7 +29,6 @@
         margin: 1rem 0;
 
         img {
-          width: 150px;
           height: 100%;
           object-fit: contain;
         }
@@ -46,6 +45,7 @@
         &:last-child {
           font-size: 1.5rem;
           margin-top: 0.75rem;
+          color: #4675b9;
         }
       }
 

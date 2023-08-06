@@ -6,11 +6,13 @@ import { Subject, takeUntil } from 'rxjs';
 import { ArsCurrencyPipe } from '@shared/pipes/currency.pipe';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-shopping-cart',
   standalone: true,
-  imports: [NgFor, NgIf, ArsCurrencyPipe, MatIconModule, MatSnackBarModule],
+  imports: [NgFor, NgIf, ArsCurrencyPipe, MatIconModule, MatSnackBarModule, MatDialogModule],
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.scss']
 })
@@ -18,6 +20,7 @@ export class ShoppingCartComponent implements OnInit {
   private readonly _localStorageService: LocalStorageService = inject(LocalStorageService);
   private readonly destroy$: Subject<void> = new Subject<void>();
   private _snackBar: MatSnackBar = inject(MatSnackBar);
+  public dialog: MatDialog = inject(MatDialog);
   public items: Product[] = [];
   public total: number = 0;
 
@@ -58,7 +61,32 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   deleteItem(item: Product): void {
-    this._localStorageService.deleteItem(item);
-    this.openSnackBar("Se ha eliminado el producto del carrito");
+    const dialogRef = this.dialog.open(DialogContent)
+    dialogRef.afterClosed().subscribe({
+      next: (response) => {
+        if(response) {
+          this._localStorageService.deleteItem(item);
+          this.openSnackBar("Se ha eliminado el producto del carrito");
+        } else {
+          this.openSnackBar("El producto no se ha eliminado del carrito");
+        }
+      }
+    });
   }
 }
+
+@Component({
+  selector: 'dialog-content',
+  template: `
+    <mat-dialog-content>
+      <p>¿Estas seguro de eliminar el producto del carrito?</p>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button color="primary" mat-button [mat-dialog-close]="true">Aceptar</button>
+      <button color="accent" mat-button [mat-dialog-close]="false">Cancelar</button>
+    </mat-dialog-actions>
+    `,
+  standalone: true,
+  imports: [MatDialogModule, MatButtonModule],
+})
+export class DialogContent { }

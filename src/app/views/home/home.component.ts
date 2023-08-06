@@ -31,14 +31,16 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   categoryData(data: number): void {
     this.products = this.safeProducts;
-    if (data !== 0) {
-      this.products = this.products.filter(item => item.id_subcategoria === data);
-      this.option = this.products[0].nombre_subcategoria;
+    this.products = this.products.filter(item => item.id_subcategoria === data);
+    this.option = this.products[0]?.nombre_subcategoria;
+    if (data === 0) {
+      this.products = this.safeProducts;
     }
   }
 
   priceData(data: string): void {
     this.products = this.safeProducts;
+    this.option = '';
     this.products.sort((a: Product, b: Product): number => {
       if (data === 'Mayor precio') {
         return b.precio - a.precio

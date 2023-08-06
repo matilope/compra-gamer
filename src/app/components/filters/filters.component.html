@@ -2,8 +2,6 @@
 <mat-menu #category="matMenu">
   <button *ngFor="let item of subcategories; trackBy: trackByFn" (click)="emitProduct(item.id);" mat-menu-item>
     {{item.nombre}}
-    <img class="c-image" style="width: 100%;" [src]="'https://compragamer.net/categorias_demo/' + item.imagen"
-      [alt]="item.nombre" />
   </button>
 </mat-menu>
 
